@@ -1,0 +1,53 @@
+<%require 'nokogiri' %>
+<%require 'open-uri'%>
+
+
+<% #http = Curl.get("http://svc.mt.gov/msl/mtcadastral/Search/SearchByOwner?ownerName=CRATTY%20WES&countyId=13")%>
+<% url = "http://svc.mt.gov/msl/mtcadastral/Search/SearchByOwner?ownerName=CRATTY%20WES&countyId=13" %>
+<%data = Nokogiri::HTML(open(url))%>
+<% dataStr = data.to_s%>
+<%start = "Description:" %>
+<%stop = "/"%>
+<% match = "LOT"%>
+<% re1 =/start.*?(.match).*?stop/%>
+<% re2 =/Description:.*/%>
+<% re3 =/\b[A-Z]+\b/%>
+<% re4 = /[A-Z]+/%>
+<% re5 = / ([A-Z0-9][A-Z\s\d,.|Lot]+)/%>
+<% re6 = /([A-z\s]+): ([A-Z0-9][A-Z\s\d,.\-|ot]+)/%>
+
+<%#identityPrinter = { |match| puts match return match}%>
+
+<%#matches = dataStr.scan(re5).map(&identityPrinter)%>
+
+<%=dataStr%>
+<br />
+
+<%result = dataStr.scan(re6)%>
+
+
+	  	<%#result= re5.match(dataStr)%>
+	  	<%#=result%>
+	  	<%x=result.size+1%>
+	  	<%=x%>
+	  	<br />
+	  	<%x.times do |i|%>
+	  	<%= result[i] %>
+	  	<br />
+	  	<% end %>
+	  
+	  	<br />
+	  	
+
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+s
+<%# Comment %>
+
+ <%#= " Count to 10"%>
+ <br />
+ <%# 11.times do |i| %>
+ <%#= i %>
+ <%# end %>
+
+
