@@ -10,7 +10,11 @@
 
 <%nameArray = Array.new()%>
 <%name = Array.new()%>
-<%#
+
+
+<%=print_stuff%>
+
+<%
 =begin%>
 
 
@@ -18,24 +22,19 @@
 <%url2= "http://ravallirepublic.com/news/local/obituaries/"%>
 <%data2 = Nokogiri::HTML(open(url2))%>
 <% dataStr2 = data2.to_s%>
-<%# dataStr2%>
 <%result2 = dataStr2.scan(re2)%>
 <%result2.size.times do |i|%>
 
 			<%first_last_name = [result2[i].to_s.gsub('"', '').gsub('[', '').gsub(']', '').gsub(',', ' ').upcase] %>
-			<%#first_last_name.gsub(/\s+/m, ' ').gsub(/^\s+|\s+$/m, '').split(" ")%>
-			<%# first_last_name.reverse!%>
 			<%nameArray=add_name(nameArray,first_last_name)%>
-			<%#=name%>
+			
 			<br />
 		<% end %>
 <!-- planning on fetching other names as I can figure out how to find persons that may have interesting property -->
 
 
-<%
-#=end%>
 
-<%#nameArray=add_name(nameArray,["WES","CRATTY"])%>
+
 
 <% nameArray.size.times do |j| %>
 <%name = Array.new()%>
@@ -43,11 +42,7 @@
 	<% name=a.pop.split("\s")%>
 
 	<br />
-	<%=name[0].to_s+name[2].to_s %>
-	
-	<%#=name[2].to_s %>
-
-	<%#=a[2] %>
+	<%=name[0].to_s+" "+name[2].to_s %>
 	<br />
 	
 <br />
@@ -57,7 +52,6 @@
 
 	<%data = Nokogiri::HTML(open(url))%>
 	<% dataStr = data.to_s%>
-	<%#= a.pop.to_s+" "+a[0].to_s %>
 	<%  %>
 	<br />
 	
@@ -78,25 +72,6 @@
 					<%url3="http://svc.mt.gov/msl/MTCadastral/PrintPropertyRecordCard/GetPropertyRecordCardData?Geocode=#{temp[1]}"%>
 					<%= link_to 'Cadastral',  url3, target: '_blank' %>
 
-<% 
-=begin %>
-
-					<%data3 = Nokogiri::HTML(open(url3))%>
-					<% dataStr3 = data3.to_s%>
-<%# dataStr2%>
-<%result3 = dataStr3.scan(re3)%>
-<%result3.size.times do |i|%>
-
-			<%details = result3[i].to_s.gsub('"', '').gsub('[', '').gsub(']', '').gsub(',', ' ').gsub('nil', '').upcase %>
-			<%= details %>
-			
-			<br />
-		<% end %>
-
-<%
-
-=end %>
-
 
 
 				<br />
@@ -113,3 +88,6 @@
 
 
 		<%# http://svc.mt.gov/msl/MTCadastral/PrintPropertyRecordCard/GetPropertyRecordCardData?Geocode=13146831302810000 %>
+
+<%
+=end%>
